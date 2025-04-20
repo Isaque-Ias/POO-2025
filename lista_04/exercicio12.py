@@ -1,5 +1,5 @@
 tamanho = int(input())
-valores = [1, 1]
+valores = [0, 1]
 for i in range(tamanho - 2):
     valores.append(valores[i] + valores[i + 1])
 
