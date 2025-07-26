@@ -1,4 +1,7 @@
 import json
+import os
+
+current_folder = os.path.dirname(os.path.abspath(__file__))
 
 class Cliente:
     def __init__(self, id, nome, email, fone):
@@ -107,7 +110,7 @@ class ClienteUI:
 
     @classmethod
     def abrir(cls):
-        with open("poo_lista_06/cliente.json", "r") as file:
+        with open(current_folder + "\\cliente.json", "r") as file:
             json_dict = json.load(file)
 
         cls.clientes = {}
@@ -119,8 +122,9 @@ class ClienteUI:
         json_dict = {}
         for cliente in cls.clientes.items():
             json_dict[cliente[0]] = cliente[1].__dict__
-            
-        with open("poo_lista_06/cliente.json", "w") as file:
+        
+        with open(current_folder + "\\cliente.json", "w") as file:
             json.dump(json_dict, file)
 
 ClienteUI.main()
+

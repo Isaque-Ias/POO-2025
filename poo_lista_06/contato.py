@@ -1,5 +1,8 @@
 import json
 from datetime import datetime
+import os
+
+current_folder = os.path.dirname(os.path.abspath(__file__))
 
 class Contato:
     def __init__(self, id, nome, email, fone, nascimento):
@@ -143,7 +146,7 @@ class ContatoUI:
 
     @classmethod
     def abrir(cls):
-        with open("poo_lista_06/contato.json", "r") as file:
+        with open(current_folder + "\\contato.json", "r") as file:
             json_dict = json.load(file)
 
         cls.contato = {}
@@ -157,8 +160,7 @@ class ContatoUI:
             json_dict[contato[0]] = contato[1].__dict__
             json_dict[contato[0]]["nascimento"] = [contato[1].nascimento.year, contato[1].nascimento.month, contato[1].nascimento.day]
             
-        print(json_dict)
-        with open("poo_lista_06/contato.json", "w") as file:
+        with open(current_folder + "\\contato.json", "w") as file:
             json.dump(json_dict, file)
 
 ContatoUI.main()
