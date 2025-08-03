@@ -115,7 +115,7 @@ class ContatoUI:
         if cls.contatos.get(valor_id) == None:
             print("Contato não existe.")
             return
-        cls.clientes.pop(valor_id)
+        cls.contatos.pop(valor_id)
 
     @classmethod
     def atualizar(cls):
