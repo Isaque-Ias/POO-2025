@@ -1,0 +1,7 @@
+clientes.json
+servicos.json
+poo_lista_09/__pycache__/views.cpython-313.pyc
+poo_lista_09/models/__pycache__/cliente.cpython-313.pyc
+poo_lista_09/models/__pycache__/servico.cpython-313.pyc
+poo_lista_09/templates/__pycache__/manterclienteUI.cpython-313.pyc
+poo_lista_09/templates/__pycache__/manterservicoUI.cpython-313.pyc
