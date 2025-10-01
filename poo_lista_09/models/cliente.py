@@ -30,6 +30,7 @@ class Cliente:
 
 class ClienteDAO:
     __objetos = []
+    
     @classmethod
     def inserir(cls, obj):
         cls.abrir()
