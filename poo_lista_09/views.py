@@ -1,6 +1,7 @@
 from models.cliente import Cliente, ClienteDAO
 from models.servico import Servico, ServicoDAO
 from models.horario import Horario, HorarioDAO
+from models.profissional import Profissional, ProfissionalDAO
 
 class View:
     def cliente_listar():
@@ -41,35 +42,45 @@ class View:
 
         ServicoDAO.excluir(servico)
     
-    def horario_inserir(data, confirmado, id_cliente, id_servico):
+    def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
         c = Horario(0, data)
         c.set_confirmado(confirmado)
         c.set_id_cliente(id_cliente)
         c.set_id_servico(id_servico)
+        c.set_id_profissional(id_profissional)
         HorarioDAO.inserir(c)
 
     def horario_listar():
         return HorarioDAO.listar()
     
-    def horario_atualizar(id, data, confirmado, id_cliente, id_servico):
+    def horario_atualizar(id, data, confirmado, id_cliente, id_servico, id_profissional):
         c = Horario(id, data)
         c.set_confirmado(confirmado)
         c.set_id_cliente(id_cliente)
         c.set_id_servico(id_servico)
+        c.set_id_profissional(id_profissional)
         HorarioDAO.atualizar(c)
 
     def horario_excluir(id):
         c = Horario(id, None)
         HorarioDAO.excluir(c)
 
-    def cliente_criar_admin():
-        for c in View.cliente_listar():
-            if c.get_email() == "admin": return
-        View.cliente_inserir("admin", "admin", "fone", "1234")
+    def profissional_listar():
+        return ProfissionalDAO.listar()
 
-    def cliente_autenticar(email, senha):
-        for c in View.cliente_listar():
-            if c.get_email() == email and c.get_senha() == senha:
-                return {"id": c.get_id(), "nome": c.get_nome()}
+    def profissional_listar_id(id):
+        return ProfissionalDAO.listar_id(id)
 
-        return None
+    def profissional_inserir(nome, email, fone):
+        profissional = Profissional(0, nome, email, fone)
+
+        ProfissionalDAO.inserir(profissional)
+
+    def profissional_atualizar(id, nome, email, fone):
+        profissional = Profissional(id, nome, email, fone)
+        ProfissionalDAO.atualizar(profissional)
+    
+    def profissional_excluir(id):
+        profissional = Profissional(id, "", "", "")
+
+        ProfissionalDAO.excluir(profissional)

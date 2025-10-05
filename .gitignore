@@ -8,3 +8,13 @@ poo_lista_09/templates/__pycache__/manterservicoUI.cpython-313.pyc
 horarios.json
 poo_lista_09/models/__pycache__/horario.cpython-313.pyc
 poo_lista_09/templates/__pycache__/manterhorarioUI.cpython-313.pyc
+profissionais.json
+poo_lista_09/__pycache__/views.cpython-312.pyc
+poo_lista_09/models/__pycache__/cliente.cpython-312.pyc
+poo_lista_09/models/__pycache__/horario.cpython-312.pyc
+poo_lista_09/models/__pycache__/profissional.cpython-312.pyc
+poo_lista_09/models/__pycache__/servico.cpython-312.pyc
+poo_lista_09/templates/__pycache__/manterclienteUI.cpython-312.pyc
+poo_lista_09/templates/__pycache__/manterhorarioUI.cpython-312.pyc
+poo_lista_09/templates/__pycache__/manterprofissionalUI.cpython-312.pyc
+poo_lista_09/templates/__pycache__/manterservicoUI.cpython-312.pyc
