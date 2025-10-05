@@ -29,8 +29,12 @@ class ManterProfissionalUI:
 
         conselho = st.text_input("Informe o conselho")
 
+        email = st.text_input("Informe o e-mail")
+
+        senha = st.text_input("Informe a senha")
+
         if st.button("Inserir Profissional"):
-            View.profissional_inserir(nome, especialidade, conselho)
+            View.profissional_inserir(nome, especialidade, conselho, email, senha)
             st.success("Profissional inserido com sucesso")
             time.sleep(2)
             st.rerun()
@@ -47,10 +51,14 @@ class ManterProfissionalUI:
             especialidade = st.text_input("Nova especialidade", op.get_especialidade())
 
             conselho = st.text_input("Novo conselho", op.get_conselho())
+            
+            email = st.text_input("Novo e-mail", op.get_email())
+
+            senha = st.text_input("Nova senha", op.get_senha())
 
             if st.button("Atualizar Profissional"):
                 id = op.get_id()
-                View.profissional_atualizar(id, nome, especialidade, conselho)
+                View.profissional_atualizar(id, nome, especialidade, conselho, email, senha)
                 st.success("Profissional atualizado com sucesso")
 
     def excluir():
