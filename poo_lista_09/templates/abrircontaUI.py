@@ -12,7 +12,14 @@ class AbrirContaUI:
         senha = st.text_input("Informe a senha", type="password")
 
         if st.button("Inserir"):
-            View.cliente_inserir(nome, email, fone, senha)
-            st.success("Conta criada com sucesso")
+            try:
+                View.cliente_inserir(nome, email, fone, senha)
+                st.success("Conta criada com sucesso")
+            except ValueError as erro:
+                st.error(erro)
+                
+            time.sleep(2)
+            st.rerun()
+
             time.sleep(2)
             st.rerun()

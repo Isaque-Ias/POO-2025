@@ -30,8 +30,11 @@ class ManterClienteUI:
         senha = st.text_input("Informe a senha", type="password")
 
         if st.button("Inserir"):
-            View.cliente_inserir(nome, email, fone, senha)
-            st.success("Cliente inserido com sucesso")
+            try:
+                View.cliente_inserir(nome, email, fone, senha)
+                st.success("Cliente inserido com sucesso")
+            except ValueError as erro:
+                st.error(erro)
             time.sleep(2)
             st.rerun()
 
@@ -48,9 +51,12 @@ class ManterClienteUI:
             type="password")
 
             if st.button("Atualizar"):
-                id = op.get_id()
-                View.cliente_atualizar(id, nome, email, fone, senha)
-                st.success("Cliente atualizado com sucesso")
+                try:
+                    id = op.get_id()
+                    View.cliente_atualizar(id, nome, email, fone, senha)
+                    st.success("Cliente atualizado com sucesso")
+                except ValueError as erro:
+                    st.error(erro)
 
     def excluir():
         clientes = View.cliente_listar()
@@ -59,6 +65,9 @@ class ManterClienteUI:
         else:
             op = st.selectbox("Exclusão de Clientes", clientes)
             if st.button("Excluir Cliente"):
-                id = op.get_id()
-                View.cliente_excluir(id)
-                st.success("Cliente excluído com sucesso")
+                try:
+                    id = op.get_id()
+                    View.cliente_excluir(id)
+                    st.success("Cliente excluído com sucesso")
+                except ValueError as erro:
+                    st.error(erro)

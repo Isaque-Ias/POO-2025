@@ -11,16 +11,21 @@ class AbrirAgendaUI:
         intervalo = st.text_input("Informe o intervalo entre horários (min)", 30)
 
         if st.button("Abrir Agenda"):
-            i = 0
-            while True:
-                i += 1
-                if hora_livre > datetime.strptime(data + " " + hora_final, "%d/%m/%Y %H:%M"):
-                    break
-                
-                hora_livre = datetime.strptime(data + " " + hora_inicio, "%d/%m/%Y %H:%M")
-                hora_livre = hora_livre + timedelta(minutes=int(intervalo)) * i
-                View.horario_inserir(hora_livre, False, None, None, st.session_state["usuario_id"])
+            try:
+                i = 0
+                while True:
+                    i += 1
 
-            st.success("Cliente inserido com sucesso")
+                    hora_livre = datetime.strptime(data + " " + hora_inicio, "%d/%m/%Y %H:%M")
+                    hora_livre = hora_livre + timedelta(minutes=int(intervalo)) * i
+                    
+                    if hora_livre > datetime.strptime(data + " " + hora_final, "%d/%m/%Y %H:%M"):
+                        break
+                    View.horario_inserir(hora_livre, False, None, None, st.session_state["usuario_id"])
+
+                st.success("Horários inseridos com sucesso")
+            except ValueError as erro:
+                st.error(erro)
+                
             time.sleep(2)
             st.rerun()

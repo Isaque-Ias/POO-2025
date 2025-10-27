@@ -22,9 +22,12 @@ class PerfilProfissionalUI:
         type="password")
 
         if st.button("Atualizar"):
-            id = op.get_id()
-            View.profissional_atualizar(id, nome, especialidade, conselho, email, senha)
-            st.success("Profissional atualizado com sucesso")
+            try:
+                id = op.get_id()
+                View.profissional_atualizar(id, nome, especialidade, conselho, email, senha)
+                st.success("Profissional atualizado com sucesso")
+            except ValueError as erro:
+                st.error(erro)
 
     def agenda():
         horarios = View.profissional_listar_agenda(st.session_state["usuario_id"])

@@ -29,8 +29,11 @@ class ManterServicoUI:
         valor = st.text_input("Informe o valor")
 
         if st.button("Inserir Serviço"):
-            View.servico_inserir(descricao, valor)
-            st.success("Serviço inserido com sucesso")
+            try:
+                View.servico_inserir(descricao, float(valor))
+                st.success("Serviço inserido com sucesso")
+            except ValueError as erro:
+                st.error(erro)
             time.sleep(2)
             st.rerun()
 
@@ -44,10 +47,16 @@ class ManterServicoUI:
             descricao = st.text_input("Nova descrição", op.get_descricao())
 
             valor = st.text_input("Novo valor", op.get_valor())
+
             if st.button("Atualizar Serviço"):
-                id = op.get_id()
-                View.servico_atualizar(id, descricao, valor)
-                st.success("Serviço atualizado com sucesso")
+                try:
+                    id = op.get_id()
+                    View.servico_atualizar(id, descricao, float(valor))
+                    st.success("Serviço atualizado com sucesso")
+                except ValueError as erro:
+                    st.error(erro)
+                time.sleep(2)
+                st.rerun()
 
     def excluir():
         servicos = View.servico_listar()
@@ -56,6 +65,11 @@ class ManterServicoUI:
         else:
             op = st.selectbox("Exclusão de Serviços", servicos)
             if st.button("Excluir Serviço"):
-                id = op.get_id()
-                View.servico_excluir(id)
-                st.success("Serviço excluído com sucesso")
+                try:
+                    id = op.get_id()
+                    View.servico_excluir(id)
+                    st.success("Serviço excluído com sucesso")
+                except ValueError as erro:
+                    st.error(erro)
+                time.sleep(2)
+                st.rerun()

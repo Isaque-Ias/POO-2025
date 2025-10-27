@@ -19,9 +19,12 @@ class PerfilClienteUI:
         type="password")
 
         if st.button("Atualizar"):
-            id = op.get_id()
-            View.cliente_atualizar(id, nome, email, fone, senha)
-            st.success("Cliente atualizado com sucesso")
+            try:
+                id = op.get_id()
+                View.cliente_atualizar(id, nome, email, fone, senha)
+                st.success("Cliente atualizado com sucesso")
+            except ValueError as erro:
+                st.error(erro)
 
     def servicos():
         horarios = View.horario_servicos_agendados(st.session_state["usuario_id"])
