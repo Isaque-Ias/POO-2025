@@ -36,7 +36,7 @@ class View:
             if obj.get_id_cliente() == id:
                 raise ValueError("O cliente tem horários reservados")
 
-        cliente = Cliente(id, "", "", "", "")
+        cliente = Cliente(id, "_", "_", "_", "_")
         ClienteDAO.excluir(cliente)
 
     def servico_listar_id(id):
@@ -92,7 +92,7 @@ class View:
 
     def horario_excluir(id):
         obj = View.horario_listar_id(id)
-        if not obj.get_id_cliente == None:
+        if not obj.get_id_cliente() == None:
             raise ValueError("Horário já está agendado")
         c = Horario(id, None)
         HorarioDAO.excluir(c)
@@ -126,7 +126,7 @@ class View:
             if obj.get_id_profissional() == id:
                 raise ValueError("O profissional tem horários reservados")
 
-        profissional = Profissional(id, "", "", "", "", "")
+        profissional = Profissional(id, "_", "_", "_", "_", "_")
 
         ProfissionalDAO.excluir(profissional)
 
