@@ -11,9 +11,10 @@ class View:
     def horario_listar_id(id):
         return HorarioDAO.listar_id(id)
 
-    def cliente_inserir(nome, email, fone, senha):
-        if email == "admin":
-            raise ValueError("E-mail já cadastrado")
+    def cliente_inserir(nome, email, fone, senha, firstadm=False):
+        if not firstadm:
+            if email == "admin":
+                raise ValueError("E-mail já cadastrado")
         for obj in View.cliente_listar() + View.profissional_listar():
             if obj.get_email() == email:
                 raise ValueError("E-mail já cadastrado")
@@ -21,9 +22,10 @@ class View:
         cliente = Cliente(0, nome, email, fone, senha)
         ClienteDAO.inserir(cliente)
 
-    def cliente_atualizar(id, nome, email, fone, senha):
-        if email == "admin":
-            raise ValueError("E-mail já cadastrado")
+    def cliente_atualizar(id, nome, email, fone, senha, firstadm=False):
+        if not firstadm:
+            if email == "admin":
+                raise ValueError("E-mail já cadastrado")
         for obj in View.cliente_listar() + View.profissional_listar():
             if obj.get_email() == email:
                 raise ValueError("E-mail já cadastrado")
@@ -133,7 +135,7 @@ class View:
     def cliente_criar_admin():
         for c in View.cliente_listar():
             if c.get_email() == "admin": return
-        View.cliente_inserir("admin", "admin", "fone", "1234")
+        View.cliente_inserir("admin", "admin", "fone", "1234", firstadm=True)
 
     def cliente_autenticar(email, senha):
         for c in View.cliente_listar():
