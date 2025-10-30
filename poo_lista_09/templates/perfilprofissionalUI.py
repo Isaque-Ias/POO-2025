@@ -44,7 +44,8 @@ class PerfilProfissionalUI:
                             "data" : obj.get_data(),
                             "confirmado" : obj.get_confirmado(),
                             "cliente" : cliente,
-                            "serviço" : servico})
+                            "serviço" : servico,
+                            "de_menor" : cliente.get_idade() < 18})
 
             df = pd.DataFrame(dic)
             st.dataframe(df)
