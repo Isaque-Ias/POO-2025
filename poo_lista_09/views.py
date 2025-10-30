@@ -11,7 +11,7 @@ class View:
     def horario_listar_id(id):
         return HorarioDAO.listar_id(id)
 
-    def cliente_inserir(nome, email, fone, senha, firstadm=False):
+    def cliente_inserir(nome, email, fone, senha, idade, firstadm=False):
         if not firstadm:
             if email == "admin":
                 raise ValueError("E-mail já cadastrado")
@@ -19,18 +19,18 @@ class View:
             if obj.get_email() == email:
                 raise ValueError("E-mail já cadastrado")
 
-        cliente = Cliente(0, nome, email, fone, senha)
+        cliente = Cliente(0, nome, email, fone, senha, idade)
         ClienteDAO.inserir(cliente)
 
-    def cliente_atualizar(id, nome, email, fone, senha, firstadm=False):
+    def cliente_atualizar(id, nome, email, fone, senha, idade, firstadm=False):
         if not firstadm:
             if email == "admin":
                 raise ValueError("E-mail já cadastrado")
         for obj in View.cliente_listar() + View.profissional_listar():
-            if obj.get_email() == email:
+            if obj.get_email() == email and not obj.get_id() == id:
                 raise ValueError("E-mail já cadastrado")
         
-        cliente = Cliente(id, nome, email, fone, senha)
+        cliente = Cliente(id, nome, email, fone, senha, idade)
         ClienteDAO.atualizar(cliente)
         
     def cliente_excluir(id):
@@ -38,7 +38,7 @@ class View:
             if obj.get_id_cliente() == id:
                 raise ValueError("O cliente tem horários reservados")
 
-        cliente = Cliente(id, "_", "_", "_", "_")
+        cliente = Cliente(id, "_", "_", "_", "_", "_")
         ClienteDAO.excluir(cliente)
 
     def servico_listar_id(id):
@@ -117,7 +117,7 @@ class View:
         if email == "admin":
             raise ValueError("E-mail já cadastrado")
         for obj in View.cliente_listar() + View.profissional_listar():
-            if obj.get_email() == email:
+            if obj.get_email() == email and not obj.get_id() == id:
                 raise ValueError("E-mail já cadastrado")
             
         profissional = Profissional(id, nome, especialidade, conselho, email, senha)
@@ -135,7 +135,7 @@ class View:
     def cliente_criar_admin():
         for c in View.cliente_listar():
             if c.get_email() == "admin": return
-        View.cliente_inserir("admin", "admin", "fone", "1234", firstadm=True)
+        View.cliente_inserir("admin", "admin", "fone", "1234", "18", firstadm=True)
 
     def cliente_autenticar(email, senha):
         for c in View.cliente_listar():

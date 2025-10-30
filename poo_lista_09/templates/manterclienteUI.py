@@ -28,10 +28,11 @@ class ManterClienteUI:
         email = st.text_input("Informe o e-mail")
         fone = st.text_input("Informe o fone")
         senha = st.text_input("Informe a senha", type="password")
+        idade = st.text_input("Informe a idade")
 
         if st.button("Inserir"):
             try:
-                View.cliente_inserir(nome, email, fone, senha)
+                View.cliente_inserir(nome, email, fone, senha, idade)
                 st.success("Cliente inserido com sucesso")
             except ValueError as erro:
                 st.error(erro)
@@ -49,11 +50,12 @@ class ManterClienteUI:
             fone = st.text_input("Novo fone", op.get_fone())
             senha = st.text_input("Nova senha", op.get_senha(),
             type="password")
+            idade = st.text_input("Nova idade", op.get_idade())
 
             if st.button("Atualizar"):
                 try:
                     id = op.get_id()
-                    View.cliente_atualizar(id, nome, email, fone, senha)
+                    View.cliente_atualizar(id, nome, email, fone, senha, idade)
                     st.success("Cliente atualizado com sucesso")
                 except ValueError as erro:
                     st.error(erro)

@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from models.dao import DAO
 
 class Horario:
     def __init__(self, id, data):
@@ -44,47 +45,7 @@ class Horario:
         horario.set_id_profissional(dic["id_profissional"])
         return horario
 
-class HorarioDAO:
-    __objetos = []
-
-    @classmethod
-    def inserir(cls, obj):
-        cls.abrir()
-        id = 0
-        for aux in cls.__objetos:
-            if aux.get_id() > id: id = aux.get_id()
-
-        obj.set_id(id + 1)
-        cls.__objetos.append(obj)
-        cls.salvar()
-
-    @classmethod
-    def listar(cls):
-        cls.abrir()
-        return cls.__objetos
-
-    @classmethod
-    def listar_id(cls, id):
-        cls.abrir()
-        for obj in cls.__objetos:
-            if obj.get_id() == id: return obj
-        return None
-
-    @classmethod
-    def atualizar(cls, obj):
-        aux = cls.listar_id(obj.get_id())
-        if aux != None:
-            cls.__objetos.remove(aux)
-            cls.__objetos.append(obj)
-            cls.salvar()
-
-    @classmethod
-    def excluir(cls, obj):
-        aux = cls.listar_id(obj.get_id())
-        if aux != None:
-            cls.__objetos.remove(aux)
-            cls.salvar()
-
+class HorarioDAO(DAO):
     @classmethod
     def abrir(cls):
         cls.__objetos = []
