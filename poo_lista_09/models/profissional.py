@@ -45,18 +45,17 @@ class Profissional:
 class ProfissionalDAO(DAO):
     @classmethod
     def abrir(cls):
-        cls.__objetos = []
+        cls._objetos = []
         try:
             with open("profissionais.json", mode="r") as arquivo:
                 list_dic = json.load(arquivo)
                 for dic in list_dic:
                     obj = Profissional.from_json(dic)
-                    cls.__objetos.append(obj)
-
+                    cls._objetos.append(obj)
         except FileNotFoundError:
             pass
 
     @classmethod
     def salvar(cls):
         with open("profissionais.json", mode="w") as arquivo:
-            json.dump(cls.__objetos, arquivo, default = Profissional.to_json)
+            json.dump(cls._objetos, arquivo, default = Profissional.to_json)

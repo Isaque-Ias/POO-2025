@@ -38,6 +38,8 @@ class PerfilProfissionalUI:
             for obj in horarios:
                 cliente = View.cliente_listar_id(obj.get_id_cliente())
                 servico = View.servico_listar_id(obj.get_id_servico())
+                cliente_idade = 18
+                if cliente != None: cliente_idade = int(cliente.get_idade())
                 if cliente != None: cliente = cliente.get_nome()
                 if servico != None: servico = servico.get_descricao()
                 dic.append({"id" : obj.get_id(),
@@ -45,7 +47,7 @@ class PerfilProfissionalUI:
                             "confirmado" : obj.get_confirmado(),
                             "cliente" : cliente,
                             "serviço" : servico,
-                            "de_menor" : cliente.get_idade() < 18})
+                            "de_menor" : (cliente_idade < 18) if not cliente == None else False})
 
             df = pd.DataFrame(dic)
             st.dataframe(df)
