@@ -1,3 +1,4 @@
+import os
 import json
 from models.dao import DAO
 
@@ -53,11 +54,12 @@ class ClienteDAO(DAO):
     def abrir(cls):
         cls._objetos = []
         try:
-            with open("clientes.json", mode="r") as arquivo:
-                list_dic = json.load(arquivo)
-                for dic in list_dic:
-                    obj = Cliente.from_json(dic)
-                    cls._objetos.append(obj)
+            if os.path.getsize("clientes.json") == 0:
+                with open("clientes.json", mode="r") as arquivo:
+                    list_dic = json.load(arquivo)
+                    for dic in list_dic:
+                        obj = Cliente.from_json(dic)
+                        cls._objetos.append(obj)
 
         except FileNotFoundError:
             pass

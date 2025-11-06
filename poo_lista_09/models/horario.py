@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 from models.dao import DAO
+import os
 
 class Horario:
     def __init__(self, id, data):
@@ -50,11 +51,12 @@ class HorarioDAO(DAO):
     def abrir(cls):
         cls._objetos = []
         try:
-            with open("horarios.json", mode="r") as arquivo:
-                list_dic = json.load(arquivo)
-                for dic in list_dic:
-                    obj = Horario.from_json(dic)
-                    cls._objetos.append(obj)
+            if os.path.getsize("horarios.json") == 0:
+                with open("horarios.json", mode="r") as arquivo:
+                    list_dic = json.load(arquivo)
+                    for dic in list_dic:
+                        obj = Horario.from_json(dic)
+                        cls._objetos.append(obj)
         except FileNotFoundError:
             pass
 

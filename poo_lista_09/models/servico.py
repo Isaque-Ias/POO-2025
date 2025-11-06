@@ -1,3 +1,4 @@
+import os
 import json
 from models.dao import DAO
 
@@ -36,11 +37,12 @@ class ServicoDAO(DAO):
     def abrir(cls):
         cls._objetos = []
         try:
-            with open("servicos.json", mode="r") as arquivo:
-                list_dic = json.load(arquivo)
-                for dic in list_dic:
-                    obj = Servico.from_json(dic)
-                    cls._objetos.append(obj)
+            if os.path.getsize("servicos.json") == 0:
+                with open("servicos.json", mode="r") as arquivo:
+                    list_dic = json.load(arquivo)
+                    for dic in list_dic:
+                        obj = Servico.from_json(dic)
+                        cls._objetos.append(obj)
 
         except FileNotFoundError:
             pass

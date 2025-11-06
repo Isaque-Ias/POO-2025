@@ -1,3 +1,4 @@
+import os
 import json
 from models.dao import DAO
 
@@ -47,11 +48,12 @@ class ProfissionalDAO(DAO):
     def abrir(cls):
         cls._objetos = []
         try:
-            with open("profissionais.json", mode="r") as arquivo:
-                list_dic = json.load(arquivo)
-                for dic in list_dic:
-                    obj = Profissional.from_json(dic)
-                    cls._objetos.append(obj)
+            if os.path.getsize("profissionais.json") == 0:
+                with open("profissionais.json", mode="r") as arquivo:
+                    list_dic = json.load(arquivo)
+                    for dic in list_dic:
+                        obj = Profissional.from_json(dic)
+                        cls._objetos.append(obj)
         except FileNotFoundError:
             pass
 
