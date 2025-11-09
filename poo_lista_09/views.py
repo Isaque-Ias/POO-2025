@@ -27,6 +27,9 @@ class View:
             if email == "admin":
                 raise ValueError("E-mail já cadastrado")
         for obj in View.cliente_listar() + View.profissional_listar():
+            if obj.get_id() == id:
+                if obj.get_email() == "admin":
+                    raise ValueError("Não se pode alterar o e-mail do administrador")
             if obj.get_email() == email and not obj.get_id() == id:
                 raise ValueError("E-mail já cadastrado")
         
@@ -38,7 +41,11 @@ class View:
             if obj.get_id_cliente() == id:
                 raise ValueError("O cliente tem horários reservados")
 
-        cliente = Cliente(id, "_", "_", "_", "_", "_")
+        cliente = View.cliente_listar_id(id)
+        if cliente.get_email() == "admin":
+            raise ValueError("Não se pode remover o administrador")
+
+        cliente = Cliente(id, "_", "_", "_", "_", "0")
         ClienteDAO.excluir(cliente)
 
     def servico_listar_id(id):

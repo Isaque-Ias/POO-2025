@@ -37,7 +37,7 @@ class ServicoDAO(DAO):
     def abrir(cls):
         cls._objetos = []
         try:
-            if os.path.getsize("servicos.json") == 0:
+            if os.path.getsize("servicos.json") > 0:
                 with open("servicos.json", mode="r") as arquivo:
                     list_dic = json.load(arquivo)
                     for dic in list_dic:

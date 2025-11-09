@@ -54,7 +54,7 @@ class ClienteDAO(DAO):
     def abrir(cls):
         cls._objetos = []
         try:
-            if os.path.getsize("clientes.json") == 0:
+            if os.path.getsize("clientes.json") > 0:
                 with open("clientes.json", mode="r") as arquivo:
                     list_dic = json.load(arquivo)
                     for dic in list_dic:

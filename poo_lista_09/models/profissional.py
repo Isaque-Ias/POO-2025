@@ -48,7 +48,7 @@ class ProfissionalDAO(DAO):
     def abrir(cls):
         cls._objetos = []
         try:
-            if os.path.getsize("profissionais.json") == 0:
+            if os.path.getsize("profissionais.json") > 0:
                 with open("profissionais.json", mode="r") as arquivo:
                     list_dic = json.load(arquivo)
                     for dic in list_dic:
